@@ -1,0 +1,5 @@
+yfinance==0.2.48
+pandas>=2.0.0
+feedparser==6.0.11
+requests>=2.31.0
+python-dateutil>=2.9.0.post0
