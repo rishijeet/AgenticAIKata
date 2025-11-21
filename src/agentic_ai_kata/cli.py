@@ -13,6 +13,9 @@ def main() -> None:
     parser.add_argument("--summarize", action="store_true", help="Summarize news items using a local Ollama model")
     parser.add_argument("--ollama-model", default="mistral:latest", help="Ollama model name (default: mistral:latest)")
     parser.add_argument("--ollama-url", default="http://localhost:11434", help="Ollama base URL (default: http://localhost:11434)")
+    parser.add_argument("--include-filings", action="store_true", help="Include recent SEC filings (10-K/10-Q) with section extraction")
+    parser.add_argument("--filings-limit", type=int, default=2, help="Number of recent filings to fetch (default 2)")
+    parser.add_argument("--cluster", action="store_true", help="Cluster/dedupe news before summarization")
     args = parser.parse_args()
 
     orch = Orchestrator()
@@ -22,6 +25,9 @@ def main() -> None:
         summarize=args.summarize,
         ollama_model=args.ollama_model,
         ollama_url=args.ollama_url,
+        include_filings=args.include_filings,
+        filings_limit=args.filings_limit,
+        cluster_dedupe=args.cluster,
     )
 
     if args.json:
